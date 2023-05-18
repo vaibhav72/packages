@@ -24,6 +24,12 @@ public class ExposurePointFeature extends CameraFeature<Point> {
   @Nullable private Point exposurePoint;
   private MeteringRectangle exposureRectangle;
   @NonNull private final SensorOrientationFeature sensorOrientationFeature;
+  private MeteringRectangle[] defaultExposureRectangle;
+
+  private boolean shouldReset(CaptureRequest.Builder requestBuilder) {
+    MeteringRectangle[] currentRectangles = requestBuilder.get(CaptureRequest.CONTROL_AE_REGIONS);
+    return !Arrays.equals(currentRectangles, defaultExposureRectangle);
+  }
 
   /**
    * Creates a new instance of the {@link ExposurePointFeature}.
@@ -107,8 +113,5 @@ public class ExposurePointFeature extends CameraFeature<Point> {
               this.cameraBoundaries, this.exposurePoint.x, this.exposurePoint.y, orientation);
     }
   }
-   private boolean shouldReset(CaptureRequest.Builder requestBuilder) {
-    MeteringRectangle[] currentRectangles = requestBuilder.get(CaptureRequest.CONTROL_AE_REGIONS);
-    return !Arrays.equals(currentRectangles, defaultExposureRectangle);
-  }
+  
 }
