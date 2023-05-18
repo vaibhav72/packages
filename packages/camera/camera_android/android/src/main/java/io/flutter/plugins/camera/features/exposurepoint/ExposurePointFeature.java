@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 package io.flutter.plugins.camera.features.exposurepoint;
-
+import java.util.Arrays;
 import android.annotation.SuppressLint;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.params.MeteringRectangle;
